@@ -10,12 +10,12 @@ using VRC.Udon;
 public class ChipBagController : UdonSharpBehaviour
 {
     [SerializeField] private GameObject bag_object;
-    [SerializeField] private float expand_factor = 100.0f;
+    [SerializeField] private float factor = 100.0f;
     private SkinnedMeshRenderer skinnedMeshRenderer;
 
     // BlendShapeのインデックス
     private int blendShapeIndex = 0;
-    private float clamped_input_value;
+    
 
 
 
@@ -28,13 +28,14 @@ public class ChipBagController : UdonSharpBehaviour
     void Update()
     {
         // BlendShapeの値を設定
-        skinnedMeshRenderer.SetBlendShapeWeight(blendShapeIndex, expand_factor);
+        skinnedMeshRenderer.SetBlendShapeWeight(blendShapeIndex, factor);
     }
 
     public void ChangeBagExpand(float input_value)
     {
+        private float clamped_input_value;
         clamped_input_value = Mathf.Clamp(input_value, 0.0f, 1.0f);
-        expand_factor =  clamped_input_value * 100.0f;
+        factor =  clamped_input_value * 100.0f;
     }
 
 }
